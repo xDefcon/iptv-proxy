@@ -1,6 +1,6 @@
 # Iptv Proxy
 
-[![Actions Status](https://github.com/pierre-emmanuelJ/iptv-proxy/workflows/CI/badge.svg)](https://github.com/pierre-emmanuelJ/iptv-proxy/actions?query=workflow%3ACI)
+[![Actions Status](https://github.com/xDefcon/iptv-proxy/workflows/CI/badge.svg)](https://github.com/xDefcon/iptv-proxy/actions?query=workflow%3ACI)
 
 ## Description
 
@@ -129,7 +129,7 @@ New xtream credentials
 
 ## Installation
 
-Download lasted [release](https://github.com/pierre-emmanuelJ/iptv-proxy/releases)
+Download lasted [release](https://github.com/xDefcon/iptv-proxy/releases)
 
 Or
 
@@ -257,7 +257,7 @@ and auth with token...
 ## Powered by
 
 - [cobra](https://github.com/spf13/cobra)
-- [go.xtream-codes](https://github.com/tellytv/go.xtream-codes)
+- [go.xtream-codes](https://github.com/xDefcon/go.xtream-codes)
 - [gin](https://github.com/gin-gonic/gin)
 
 Grab me a beer 🍻

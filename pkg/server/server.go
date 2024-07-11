@@ -30,8 +30,8 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/jamesnetherton/m3u"
-	"github.com/pierre-emmanuelJ/iptv-proxy/pkg/config"
 	uuid "github.com/satori/go.uuid"
+	"github.com/xDefcon/iptv-proxy/pkg/config"
 
 	"github.com/gin-gonic/gin"
 )
@@ -64,9 +64,9 @@ func NewServer(config *config.ProxyConfig) (*Config, error) {
 		}
 	}
 
-        if trimmedCustomId := strings.Trim(config.CustomId, "/"); trimmedCustomId != "" {
-                endpointAntiColision = trimmedCustomId
-        }
+	if trimmedCustomId := strings.Trim(config.CustomId, "/"); trimmedCustomId != "" {
+		endpointAntiColision = trimmedCustomId
+	}
 
 	return &Config{
 		config,

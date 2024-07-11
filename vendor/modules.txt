@@ -139,9 +139,6 @@ github.com/spf13/viper
 # github.com/subosito/gotenv v1.2.0
 ## explicit
 github.com/subosito/gotenv
-# github.com/tellytv/go.xtream-codes v0.0.0-20220204001149-59925bc76764
-## explicit; go 1.17
-github.com/tellytv/go.xtream-codes
 # github.com/twitchyliquid64/golang-asm v0.15.1
 ## explicit; go 1.13
 github.com/twitchyliquid64/golang-asm/asm/arch
@@ -164,6 +161,9 @@ github.com/twitchyliquid64/golang-asm/unsafeheader
 # github.com/ugorji/go/codec v1.2.9
 ## explicit; go 1.11
 github.com/ugorji/go/codec
+# github.com/xDefcon/go.xtream-codes v0.0.0-20240711114522-b4d10c7715b1
+## explicit; go 1.17
+github.com/xDefcon/go.xtream-codes
 # golang.org/x/arch v0.0.0-20210923205945-b76863e36670
 ## explicit; go 1.17
 golang.org/x/arch/x86/x86asm
