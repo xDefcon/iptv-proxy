@@ -103,22 +103,17 @@ func (c *Client) Action(config *config.ProxyConfig, action string, q url.Values)
 
 	switch action {
 	case getLiveCategories:
-		categories, ok := respBody.([]*xtream.Category)
-		if !ok {
-			respBody = []xtream.Category{}
-			return
-		}
-		var filteredCategories []xtream.Category
-		for _, catPtr := range categories {
-			// Ensure the pointer is not nil before using it
-			if catPtr != nil && strings.HasPrefix(catPtr.Name, "IT|") {
-				// Dereference and trim the string.
-				cat := *catPtr
-				cat.Name = strings.TrimPrefix(cat.Name, "IT|")
-				filteredCategories = append(filteredCategories, cat)
+		respBody, err = c.GetLiveCategories()
+		if err == nil {
+			var filteredCategories []xtream.Category
+			for _, category := range respBody.([]xtream.Category) {
+				if strings.HasPrefix(category.Name, "IT|") {
+					category.Name = strings.TrimPrefix(category.Name, "IT|")
+					filteredCategories = append(filteredCategories, category)
+				}
 			}
+			respBody = filteredCategories
 		}
-		respBody = filteredCategories
 	case getLiveStreams:
 		categoryID := ""
 		if len(q["category_id"]) > 0 {
