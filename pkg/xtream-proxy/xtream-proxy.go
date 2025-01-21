@@ -107,7 +107,7 @@ func (c *Client) Action(config *config.ProxyConfig, action string, q url.Values)
 		if err == nil {
 			var filteredCategories []xtream.Category
 			for _, category := range respBody.([]xtream.Category) {
-				if strings.HasPrefix(category.Name, "IT|") {
+				if strings.HasPrefix(category.Name, "IT") {
 					category.Name = strings.TrimPrefix(category.Name, "IT|")
 					filteredCategories = append(filteredCategories, category)
 				}
