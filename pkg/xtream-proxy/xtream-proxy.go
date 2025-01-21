@@ -24,6 +24,7 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
+	"strings"
 
 	xtream "github.com/xDefcon/go.xtream-codes"
 	"github.com/xDefcon/iptv-proxy/pkg/config"
@@ -102,7 +103,22 @@ func (c *Client) Action(config *config.ProxyConfig, action string, q url.Values)
 
 	switch action {
 	case getLiveCategories:
-		respBody, err = c.GetLiveCategories()
+		categories, ok := respBody.([]*xtream.Category)
+		if !ok {
+			respBody = []xtream.Category{}
+			return
+		}
+		var filteredCategories []xtream.Category
+		for _, catPtr := range categories {
+			// Ensure the pointer is not nil before using it
+			if catPtr != nil && strings.HasPrefix(catPtr.Name, "IT|") {
+				// Dereference and trim the string.
+				cat := *catPtr
+				cat.Name = strings.TrimPrefix(cat.Name, "IT|")
+				filteredCategories = append(filteredCategories, cat)
+			}
+		}
+		respBody = filteredCategories
 	case getLiveStreams:
 		categoryID := ""
 		if len(q["category_id"]) > 0 {
@@ -110,13 +126,11 @@ func (c *Client) Action(config *config.ProxyConfig, action string, q url.Values)
 		}
 		respBody, err = c.GetLiveStreams(categoryID)
 	case getVodCategories:
-		respBody, err = c.GetVideoOnDemandCategories()
+		//return empty list
+
+		respBody = []xtream.Category{}
 	case getVodStreams:
-		categoryID := ""
-		if len(q["category_id"]) > 0 {
-			categoryID = q["category_id"][0]
-		}
-		respBody, err = c.GetVideoOnDemandStreams(categoryID)
+		respBody = []xtream.Stream{}
 	case getVodInfo:
 		httpcode, err = validateParams(q, "vod_id")
 		if err != nil {
@@ -124,13 +138,9 @@ func (c *Client) Action(config *config.ProxyConfig, action string, q url.Values)
 		}
 		respBody, err = c.GetVideoOnDemandInfo(q["vod_id"][0])
 	case getSeriesCategories:
-		respBody, err = c.GetSeriesCategories()
+		respBody = []xtream.Category{}
 	case getSeries:
-		categoryID := ""
-		if len(q["category_id"]) > 0 {
-			categoryID = q["category_id"][0]
-		}
-		respBody, err = c.GetSeries(categoryID)
+		respBody = []xtream.Stream{}
 	case getSerieInfo:
 		httpcode, err = validateParams(q, "series_id")
 		if err != nil {
